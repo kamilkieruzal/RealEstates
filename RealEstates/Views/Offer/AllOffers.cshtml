@@ -1,0 +1,117 @@
+﻿@model IEnumerable<RealEstates.Core.Entities.Offer>
+
+@{
+    ViewBag.Title = "Wszystkie oferty";
+}
+
+<h2>Wszystkie oferty</h2>
+
+<form method="get" class="form-horizontal">
+	<table class="table table-striped table-condensed table-bordered">
+		<tr>
+			<th>
+				Liczba pokoi od:
+			</th>
+			<th>
+				Liczba pokoi do:
+			</th>
+			<th>
+				Min. pow.:
+			</th>
+			<th>
+				Max. pow.:
+			</th>
+			<th>
+				Min. cena:
+			</th>
+			<th>
+				Max. cena:
+			</th>
+			<th>
+				Tylko z balkonem:
+			</th>
+			<th>
+				Piętro:
+			</th>
+		</tr>
+
+		<tr>
+			<td>
+				<input name="MinNumberOfRooms" type="number" />
+			</td>
+			<td>
+				<input name="MaxNumberOfRooms" type="number" />
+			</td>
+			<td>
+				<input name="MinArea" type="number" />
+			</td>
+			<td>
+				<input name="MaxArea" type="number" />
+			</td>
+			<td>
+				<input name="MinPrice" type="number" step="0.01" />
+			</td>
+			<td>
+				<input name="MaxPrice" type="number" step="0.01" />
+			</td>
+			<td>
+				<input name="IsBalcony" type="checkbox" value="true" />
+			</td>
+			<td>
+				<input name="Level" type="number" />
+			</td>
+	</table>
+	<button>Filtruj</button>
+</form>
+
+	<table class="table table-striped table-condensed table-bordered">
+		<tr>
+			<th>
+				Lokalizacja
+			</th>
+			<th>
+				Licza pokoi
+			</th>
+			<th>
+				Cena
+			</th>
+			<th>
+				Opis
+			</th>
+			<th>
+				Zdjęcie
+			</th>
+			<th>
+				Akcja
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Location)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NumberOfRooms)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@{
+				var image = item.Photos.FirstOrDefault();
+				var imageData = System.Text.Encoding.UTF8.GetString(image != null ? image.PhotoData : new byte[0]);
+					}
+					<img src='@imageData' style="max-width:100px; max-height:100px;" />
+				</td>
+				<td>
+					@Html.ActionLink("Szczegóły", "Edit", new { id = item.Id })
+				</td>
+			</tr>
+		}
+
+	</table>

@@ -1,0 +1,79 @@
+﻿@model RealEstates.Web.ViewModels.RegisterUserViewModel
+
+@{
+	//Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Register</title>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.js">
+	</script>
+</head>
+<body>
+	@{ Html.EnableClientValidation(); }
+	@using (Html.BeginForm()) 
+	{
+		@Html.AntiForgeryToken()
+		<div>
+			<fieldset>
+				<legend>Rejestracja</legend>
+				<div class="editor-label">
+					@Html.LabelFor(u => u.Email)
+				</div>
+				<div class="editor-field">
+					@Html.TextBoxFor(u => u.Email)
+					@Html.ValidationMessageFor(u => u.Email)
+				</div>
+
+				<div class="editor-label">
+					@Html.LabelFor(u => u.PhoneNumber)
+				</div>
+				<div class="editor-field">
+					@Html.TextBoxFor(u => u.PhoneNumber)
+					@Html.ValidationMessageFor(u => u.PhoneNumber)
+				</div>
+
+				<div class="editor-label">
+					@Html.LabelFor(u => u.Type)
+				</div>
+				<div class="editor-field">
+					<select data-val="true" data-val-required="A" id="Type" name="Type">
+						<option value="1">Kupuję</option>
+						<option value="2">Sprzedaję</option>
+					</select>
+					@Html.ValidationMessageFor(u => u.Type)
+				</div>
+
+				<div class="editor-label">
+					@Html.LabelFor(u => u.Password)
+				</div>
+				<div class="editor-field">
+					@Html.PasswordFor(u => u.Password)
+					@Html.ValidationMessageFor(u => u.Password)
+				</div>
+
+				<div class="editor-label">
+					@Html.LabelFor(u => u.PasswordConfirmation)
+				</div>
+				<div class="editor-field">
+					@Html.PasswordFor(u => u.PasswordConfirmation)
+					@Html.ValidationMessageFor(u => u.PasswordConfirmation)
+				</div>
+
+				<input type="submit" value="Register" />
+			</fieldset>
+		</div>
+	}
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script> 
+	<div>
+		@Html.ActionLink("Strona główna", "Index", "Default")
+	</div>
+</body>
+</html>
