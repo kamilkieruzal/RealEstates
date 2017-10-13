@@ -2,7 +2,7 @@
 using RealEstates.Core.Contract;
 using RealEstates.Core.Entities;
 using RealEstates.Core.Utils;
-using RealEstates.Web.ViewModels;
+using RealEstates.ViewModels;
 using System.Web.Mvc;
 
 namespace RealEstates.Controllers

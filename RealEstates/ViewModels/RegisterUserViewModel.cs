@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
 
-namespace RealEstates.Web.ViewModels
+namespace RealEstates.ViewModels
 {
 	public class RegisterUserViewModel
 	{
@@ -31,7 +31,6 @@ namespace RealEstates.Web.ViewModels
 		[Required(ErrorMessage = "Potwierdzenie hasła jest wymagane")]
 		[StringLength(255, ErrorMessage = "Hasło musi mieć przynajmniej 5 znaków", MinimumLength = 5)]
 		[DataType(DataType.Password)]
-		[NotMapped]
 		[System.ComponentModel.DataAnnotations.Compare("Password")]
 		public string PasswordConfirmation { get; set; }
 

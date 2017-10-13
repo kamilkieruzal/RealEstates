@@ -4,7 +4,7 @@ namespace RealEstates.Core.Entities
 {
 	public class Photo : EntityBase<int>
 	{
-		public byte[] PhotoData { get; set; }
+		public string PhotoData { get; set; }
 		public int OfferId { get; set; }
 
 		[ForeignKey("OfferId")]

@@ -1,5 +1,6 @@
 ﻿using RealEstates.Core.Contract;
 using RealEstates.Core.Utils;
+using RealEstates.Utils;
 using RealEstates.ViewModels;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -31,19 +32,20 @@ namespace RealEstates.Controllers
 				if (dbUser.Password == md5Password)
 				{
 					FormsAuthentication.SetAuthCookie(dbUser.Email, false);
+					TempData.SuccessInfo("Zalogowano pomyślnie!");
 
-					TempData["message"] = "Zalogowano pomyślnie!";
 					return Redirect(Url.Action("Index", "Default"));
 				}
 			}
-			ViewBag.Communicate = "Błędne dane logowania!";
+			TempData.WarningInfo("Błędne dane logowania!");
 			return View();
 		}
 
 		public ActionResult LogOut()
 		{
 			FormsAuthentication.SignOut();
-			ViewBag.Communicate = "Wylogowano pomyślnie!";
+			TempData.SuccessInfo("Wylogowano pomyślnie!");
+
 			return RedirectToAction("Index", "Default");
 		}
 	}

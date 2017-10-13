@@ -1,5 +1,8 @@
-﻿using RealEstates.Core.Contract;
+﻿using AutoMapper;
+using RealEstates.Core.Contract;
 using RealEstates.Core.Entities;
+using RealEstates.ViewModels;
+using System.Web;
 using System.Web.Mvc;
 
 namespace RealEstates.Controllers
@@ -8,13 +11,16 @@ namespace RealEstates.Controllers
 	{
 		private IUserRepository userRepository;
 		private IOfferRepository offerRepository;
+		private readonly IMapper mapper;
 
 		public MyOfferController(
 			IUserRepository userRepository,
-			IOfferRepository offerRepository)
+			IOfferRepository offerRepository,
+			IMapper mapper)
 		{
 			this.userRepository = userRepository;
 			this.offerRepository = offerRepository;
+			this.mapper = mapper;
 		}
 
 		public ActionResult Index()
@@ -41,8 +47,9 @@ namespace RealEstates.Controllers
 
 		[HttpPost]
 		[Authorize]
-		public ActionResult AddOffer(Offer offer)
+		public ActionResult AddOffer(AddOfferViewModel addOfferViewModel)
 		{
+			var offer = mapper.Map<Offer>(addOfferViewModel);
 			var email = HttpContext.User.Identity.Name;
 			var user = userRepository.GetUser(email);
 			offer.UserId = user.Id;
